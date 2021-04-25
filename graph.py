@@ -40,6 +40,9 @@ def points_from_image():
     points[:, 1] = points[:, 1] / (423/10)  # 423 - > 10
     points[:, 2] = points[:, 2]  # 3 (-1 - 2ft )
 
+    # flip x axis so that it goes 0 to 30, down to up
+    points[:, 0] = np.max(points[:, 0]) - points[:, 0]
+
     return points
 
 
@@ -91,12 +94,13 @@ def plot_points(points):
 
     ax.scatter(points[:, 1], points[:, 0], points[:, 2], marker='o')
 
-    # ax.set_xlabel('X Label')
-    # ax.set_ylabel('Y Label')
-    # ax.set_zlabel('Z Label')
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    ax.set_zlabel('Z')
 
     # ax.view_init(elev, azimuth angle)
-    ax.view_init(90, -90)
+    ax.view_init(90, -90)  # X-Y Axis
+    # ax.view_init(0, 180)  # Y-Z Axis
 
     plt.show()
 
